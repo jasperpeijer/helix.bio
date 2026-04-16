@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helix.Bio", "Helix.Bio\Helix.Bio.csproj", "{65B9A088-C1B6-4DD1-BE11-C320C1D3BF56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helix.Bio.UI", "Helix.Bio.UI\Helix.Bio.UI.csproj", "{56D28AEF-7726-4C3D-9CC1-D47C51667874}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65B9A088-C1B6-4DD1-BE11-C320C1D3BF56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B9A088-C1B6-4DD1-BE11-C320C1D3BF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B9A088-C1B6-4DD1-BE11-C320C1D3BF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B9A088-C1B6-4DD1-BE11-C320C1D3BF56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56D28AEF-7726-4C3D-9CC1-D47C51667874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56D28AEF-7726-4C3D-9CC1-D47C51667874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56D28AEF-7726-4C3D-9CC1-D47C51667874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56D28AEF-7726-4C3D-9CC1-D47C51667874}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

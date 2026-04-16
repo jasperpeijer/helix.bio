@@ -1,0 +1,74 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Helix.Bio.UI.ViewModels"
+             x:Class="Helix.Bio.UI.Views.SequenceProfilerView"
+             x:CompileBindings="False"
+             x:DataType="vm:SequenceProfilerViewModel">
+
+    <ScrollViewer>
+        <StackPanel Spacing="24" Margin="40,30" MaxWidth="800" HorizontalAlignment="Left">
+            
+            <StackPanel Spacing="6">
+                <TextBlock Text="Sequence Engine" FontSize="26" FontWeight="SemiBold" Foreground="#0F172A"/>
+                <TextBlock Text="Profile, pack, and manipulate raw DNA sequences in 4-bit memory." Foreground="#64748B" FontSize="14"/>
+            </StackPanel>
+            
+            <StackPanel Spacing="8">
+                <TextBlock Text="RAW SEQUENCE INPUT" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1.2"/>
+                <TextBox Text="{Binding DnaInput}" 
+                         TextWrapping="Wrap" 
+                         Height="120"
+                         Background="#FFFFFF"
+                         BorderBrush="#CBD5E1"
+                         CornerRadius="6"
+                         FontFamily="Consolas, monospace"
+                         Foreground="#334155"
+                         Padding="12"/>
+            </StackPanel>
+            
+            <Grid ColumnDefinitions="*, 16, *">
+                <Button Grid.Column="0" 
+                        Command="{Binding PackSequenceCommand}" 
+                        Content="Profile Memory" 
+                        HorizontalAlignment="Stretch" 
+                        HorizontalContentAlignment="Center"
+                        Background="#2563EB" Foreground="#FFFFFF" 
+                        FontWeight="Medium" CornerRadius="6" Padding="0,10"/>
+                        
+                <Button Grid.Column="2" 
+                        Command="{Binding ReverseComplementSequenceCommand}" 
+                        Content="Reverse Complement" 
+                        HorizontalAlignment="Stretch" 
+                        HorizontalContentAlignment="Center"
+                        Background="#F1F5F9" Foreground="#334155"
+                        BorderBrush="#E2E8F0" BorderThickness="1"
+                        FontWeight="Medium" CornerRadius="6" Padding="0,10"/>
+            </Grid>
+            
+            <Border Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="8" Padding="24" Margin="0,8,0,0">
+                <StackPanel Spacing="14">
+                    <TextBlock Text="ANALYSIS RESULTS" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" LetterSpacing="1.2"/>
+                    
+                    <TextBlock Text="{Binding StatusMessage}" Foreground="{Binding StatusColor}" FontWeight="Medium"/>
+                    
+                    <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="160, *">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="UTF-16 Memory:" Foreground="#64748B"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding StringMemoryText}" Foreground="#334155"/>
+                        
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="4-Bit Memory:" Foreground="#64748B" Margin="0,6,0,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PackedMemoryText}" Foreground="#0D9488" FontWeight="SemiBold" Margin="0,6,0,0"/>
+                    </Grid>
+
+                    <Separator Background="#E2E8F0" Margin="0,8"/>
+
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="160, *">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="GC Content:" Foreground="#64748B"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding GcContentText}" Foreground="#D97706" FontWeight="SemiBold"/>
+                    </Grid>
+                    
+                    <TextBlock Text="{Binding DecodedText}" Foreground="#64748B" FontFamily="Consolas, monospace" FontSize="13" TextWrapping="Wrap" Margin="0,12,0,0"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
