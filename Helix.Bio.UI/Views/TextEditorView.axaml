@@ -4,6 +4,10 @@
              x:Class="Helix.Bio.UI.Views.TextEditorView"
              x:CompileBindings="False"
              x:DataType="vm:TextEditorViewModel">
+    
+    <UserControl.KeyBindings>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding SaveCommand}" />
+    </UserControl.KeyBindings>
 
     <UserControl.Styles>
         <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">

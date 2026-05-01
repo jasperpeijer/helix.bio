@@ -15,7 +15,10 @@
     </Window.KeyBindings>
 
     <Window.Styles>
-        <!-- Normal item in the left window selection bar -->
+        <Style Selector="ToolTip">
+            <Setter Property="MaxWidth" Value="2000"/>
+        </Style>
+        
         <Style Selector="TabControl.activityBar > TabItem">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Padding" Value="14,16"/>
@@ -24,14 +27,12 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
         
-        <!-- Selected item in the left window selection bar -->
         <Style Selector="TabControl.activityBar > TabItem:selected">
             <Setter Property="Foreground" Value="#2563EB"/> 
             <Setter Property="BorderBrush" Value="#2563EB"/> 
             <Setter Property="Background" Value="#FFFFFF"/>
         </Style>
         
-        <!-- TODO: Figure out what this does -->
         <Style Selector="TabControl.workspace">
             <Setter Property="Template">
                 <ControlTemplate>
@@ -53,7 +54,6 @@
             </Setter>
         </Style>
 
-        <!-- Unselected tab in main screen -->
         <Style Selector="TabControl.workspace > TabItem">
             <Setter Property="MinHeight" Value="32"/> 
             <Setter Property="FontSize" Value="12"/> 
@@ -63,7 +63,9 @@
                             Background="#F8FAFC"
                             BorderBrush="#E2E8F0"
                             BorderThickness="1,1,1,1"
-                            Margin="0,0,-1,0">
+                            Margin="0,0,-1,0"
+                            ToolTip.Tip="{Binding TabToolTip}"
+                            ToolTip.ShowDelay="400">
                         <Panel>
                             <Border Name="PART_TopHighlight" Height="2" VerticalAlignment="Top" Background="Transparent"/>
                             <ContentPresenter Content="{TemplateBinding Header}"
@@ -76,31 +78,22 @@
             </Setter>
         </Style>
         
-        <!-- Selected tab main part -->
         <Style Selector="TabControl.workspace > TabItem:selected /template/ Border#PART_LayoutRoot">
             <Setter Property="Background" Value="#FFFFFF"/>
             <Setter Property="BorderThickness" Value="1,1,1,0"/> 
         </Style>
         
-        <!-- Selected tab highlighted part -->
-        <!-- TODO: Check if border can be made thinner -->
         <Style Selector="TabControl.workspace > TabItem:selected /template/ Border#PART_TopHighlight">
             <Setter Property="Background" Value="#3674FC"/>
         </Style>
 
-        <!-- Close tab cross button -->
         <Style Selector="Button.closeTab /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        <!-- Close tab cross button on hover -->
+        
         <Style Selector="Button.closeTab:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="#F1F5F9"/> 
-        </Style>
-        
-        <!-- TODO: Figure out what this does -->
-        <Style Selector="Button.closeTab:pointerover TextBlock">
-            <Setter Property="Foreground" Value="#EF4444"/> 
         </Style>
     </Window.Styles>
     
@@ -165,7 +158,7 @@
                         PointerWheelChanged="WorkspaceTabs_PointerWheelChanged"
                         DragDrop.AllowDrop="True"
                         DragDrop.Drop="WorkspaceTabs_Drop"
-                        DragDrop.DragOver="WorkspaceTabs_DragOver"> 
+                        DragDrop.DragOver="WorkspaceTabs_DragOver">
                 
                 <!-- TODO: Figure out what this does -->
                 <TabControl.ItemsPanel>
@@ -177,22 +170,52 @@
                 <!-- TODO: Figure out what this does -->
                 <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Spacing="8" 
-                                    Background="Transparent"
-                                    PointerPressed="TabItem_PointerPressed">
+                        <Border Background="Transparent" 
+                                HorizontalAlignment="Stretch" 
+                                VerticalAlignment="Stretch">
                             
-                            <TextBlock Text="{Binding TabTitle}" Foreground="#334155" VerticalAlignment="Center"/>
-                            
-                            <Button Classes="closeTab"
-                                    Command="{Binding #RootWindow.DataContext.CloseTabCommand}"
-                                    CommandParameter="{Binding}"
-                                    Cursor="Hand"
-                                    Width="18" Height="18"
-                                    Padding="0" 
-                                    CornerRadius="4">
-                                <TextBlock Text="✕" FontSize="9" Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Button>
-                        </StackPanel>
+                            <StackPanel Orientation="Horizontal" 
+                                        Spacing="6" 
+                                        PointerPressed="TabItem_PointerPressed">
+                                
+                                <ContentControl Content="{Binding}" ToolTip.Tip="TESTETST" ToolTip.ShowDelay="400">
+                                    <ContentControl.DataTemplates>
+                                        <DataTemplate DataType="vm:ToolWorkspaceTabViewModel">
+                                            <Path Data="{StaticResource WrenchIcon}" Fill="#64748B" Width="13" Height="13" Stretch="Uniform"/>
+                                        </DataTemplate>
+                                        
+                                        <DataTemplate DataType="vm:TextEditorViewModel">
+                                            <Grid>
+                                                <Path Data="{StaticResource HelixIcon}" 
+                                                      Fill="#10B981"
+                                                      Width="14" Height="14" Stretch="Uniform"
+                                                      IsVisible="{Binding IsFasta}"/>
+                                                <Path Data="{StaticResource FileIcon}" Fill="#94A3B8" Width="13" Height="13" Stretch="Uniform" IsVisible="{Binding IsDefaultFile}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ContentControl.DataTemplates>
+                                </ContentControl>
+
+                                <TextBlock Text="{Binding TabTitle}" 
+                                           Background="Transparent"
+                                           ToolTip.Tip="{Binding TabTooltip}"
+                                           ToolTip.Placement="Bottom"
+                                           ToolTip.VerticalOffset="15"
+                                           ToolTip.ShowDelay="100"
+                                           MaxWidth="200"
+                                           TextTrimming="CharacterEllipsis"
+                                           VerticalAlignment="Center" 
+                                           Margin="0,0,4,0"/>
+                                
+                                <Button Classes="closeTab" 
+                                        Command="{Binding #RootWindow.DataContext.CloseTabCommand}" 
+                                        CommandParameter="{Binding}"
+                                        Cursor="Hand" Width="18" Height="18" Padding="0" CornerRadius="4">
+                                    <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" 
+                                          Fill="#94A3B8" Width="10" Height="10" Stretch="Uniform"/>
+                                </Button>
+                            </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </TabControl.ItemTemplate>
             </TabControl>

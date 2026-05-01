@@ -1,0 +1,10 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Helix.Bio.UI.ViewModels"
+             xmlns:notebooks="using:Helix.Notebooks.UI"
+             x:Class="Helix.Bio.UI.Views.JupyterWorkspaceTabView"
+             x:DataType="vm:JupyterWorkspaceTabViewModel">
+    
+    <notebooks:NotebookView DataContext="{Binding ActiveSession}"></notebooks:NotebookView>
+    
+</UserControl>

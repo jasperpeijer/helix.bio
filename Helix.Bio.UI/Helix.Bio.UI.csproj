@@ -26,5 +26,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Helix.Bio\Helix.Bio.csproj" />
+      <ProjectReference Include="..\Helix.Notebooks.UI\Helix.Notebooks.UI.csproj" />
     </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -19,9 +20,20 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
     {
         WeakReferenceMessenger.Default.Register(this);
         OpenNewSequenceProfiler();
-        OpenTestTab();
         string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         Explorer.LoadDirectory(docsPath);
+
+        var newJupyter = new JupyterWorkspaceTabViewModel()
+        {
+            TabTitle = "Jupyter"
+        };
+        OpenTabs.Add(newJupyter);
+        
+        var newJupyter2 = new JupyterWorkspaceTabViewModel()
+        {
+            TabTitle = "Jupyter"
+        };
+        OpenTabs.Add(newJupyter2);
     }
 
     [RelayCommand]
@@ -34,22 +46,6 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
         
         OpenTabs.Add(newTool);
         ActiveTab = newTool;
-    }
-
-    [RelayCommand]
-    private void OpenTestTab()
-    {
-        for (var i = 0; i < 6; i++)
-        {
-            Random rand = new Random();
-            
-            var newTool = new TestControlViewModel()
-            {
-                TabTitle = "Test Tab" + rand.Next(100)
-            };
-
-            OpenTabs.Add(newTool);
-        }
     }
 
     [RelayCommand]
@@ -74,6 +70,7 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
         
         tabToClose.Close();
         OpenTabs.Remove(tabToClose);
+        DisambiguateTabs();
     }
 
     [RelayCommand]
@@ -94,6 +91,24 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
 
     public void Receive(OpenFileMessage message)
     {
+        if (message.FilePath.EndsWith(".ipynb", System.StringComparison.OrdinalIgnoreCase))
+        {
+            foreach (var tab in OpenTabs)
+            {
+                if (tab is JupyterWorkspaceTabViewModel jupyterTab &&
+                    jupyterTab.ActiveSession.CurrentFilePath == message.FilePath)
+                {
+                    ActiveTab = tab;
+                    return;
+                }
+            }
+
+            var newNotebook = new JupyterWorkspaceTabViewModel(message.FilePath);
+            OpenTabs.Add(newNotebook);
+            ActiveTab = newNotebook;
+            return;
+        }
+        
         foreach (var tab in OpenTabs)
         {
             if (tab is TextEditorViewModel editorTab && editorTab.FilePath == message.FilePath)
@@ -106,5 +121,51 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
         var newEditor = new TextEditorViewModel(message.FilePath);
         OpenTabs.Add(newEditor);
         ActiveTab = newEditor;
+        DisambiguateTabs();
+    }
+
+    private void DisambiguateTabs()
+    {
+        var textTabs = OpenTabs.OfType<TextEditorViewModel>().ToList();
+        var grouped = textTabs.GroupBy(t => Path.GetFileName(t.FilePath));
+
+        foreach (var group in grouped)
+        {
+            var tabs = group.ToList();
+
+            if (tabs.Count == 1)
+            {
+                tabs[0].UpdateBaseTitle(Path.GetFileName(tabs[0].FilePath));
+            }
+            else
+            {
+                int partsToKeep = 1;
+                bool allUnique = false;
+
+                while (!allUnique && partsToKeep < 10)
+                {
+                    partsToKeep++;
+                    var nameCounts = tabs.GroupBy(t => GetPathSuffix(t.FilePath, partsToKeep)).ToList();
+
+                    if (nameCounts.Count == tabs.Count)
+                    {
+                        foreach (var tab in tabs)
+                        {
+                            tab.UpdateBaseTitle(GetPathSuffix(tab.FilePath, partsToKeep));
+                        }
+
+                        allUnique = true;
+                    }
+                }
+            }
+        }
+    }
+
+    private string GetPathSuffix(string path, int parts)
+    {
+        var segments = path.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        int take = System.Math.Min(segments.Length, parts);
+
+        return string.Join("/", segments.Skip(segments.Length - take));
     }
 }

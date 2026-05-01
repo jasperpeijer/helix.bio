@@ -1,76 +1,55 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Helix.Bio.UI.ViewModels;
 
-public partial class SequenceProfilerViewModel : WorkspaceTabViewModel
+public partial class SequenceProfilerViewModel : ToolWorkspaceTabViewModel
 {
-    [ObservableProperty]
-    private string? _dnaInput = "ATGCGTNNCGTAGCTAGCTAGCATCGATCGATCGA";
-    
-    [ObservableProperty]
-    private string? _statusMessage = "Ready";
+    [ObservableProperty] private string _inputSequence = string.Empty;
+    [ObservableProperty] private string _sequenceType = "Pending...";
+    [ObservableProperty] private int _sequenceLength = 0;
+    [ObservableProperty] private double _gcContent = 0.0;
+    [ObservableProperty] private double _meltingTemperature = 0.0;
+    [ObservableProperty] private double _molecularWeight = 0.0;
+    [ObservableProperty] private string _warnings = string.Empty;
 
-    [ObservableProperty]
-    private string? _statusColor = "Gray"; 
-
-    [ObservableProperty]
-    private string? _stringMemoryText = "";
-
-    [ObservableProperty]
-    private string? _packedMemoryText = "";
-
-    [ObservableProperty]
-    private string? _decodedText = "";
-
-    [ObservableProperty] private string? gcContentText = "";
-
-    [RelayCommand]
-    private void PackSequence()
+    public SequenceProfilerViewModel()
     {
-        if (string.IsNullOrEmpty(DnaInput)) return;
-
-        try
-        {
-            int stringBytes = DnaInput.Length * 2;
-            var dna = new DnaSequence(DnaInput.AsSpan());
-            int packedBytes = dna.GetMemoryFootprintBytes();
-
-            StatusMessage = "Status: Successfully Packed!";
-            StatusColor = "LightGreen";
-            StringMemoryText = $"Standard String Memory (UTF-16): {stringBytes} bytes";
-            PackedMemoryText =
-                $"4-Bit Packed Memory: {packedBytes} bytes ({(1 - (double)packedBytes / stringBytes):P0} smaller)";
-            DecodedText = $"Decoded Verification: {dna}";
-            GcContentText = $"GC-Content: {dna.GcContent:P2}";
-        }
-        catch (Exception e)
-        {
-            StatusMessage = $"Error: {e.Message}";
-            StatusColor = "Red";
-            StringMemoryText = "";
-            PackedMemoryText = "";
-            DecodedText = "";
-        }
+        TabTitle = "Sequence Profiler";
+        TabTooltip = "Biochemical Sequence Analysis";
     }
 
     [RelayCommand]
-    private void ReverseComplementSequence()
+    private void AnalyzeSequence()
     {
-        if (string.IsNullOrEmpty(DnaInput)) return;
+        if (string.IsNullOrWhiteSpace(InputSequence))
+        {
+            Warnings = "Please provide a valid sequence";
+            return;
+        }
+
+        string cleanString = Regex.Replace(InputSequence, @"\s+", "");
 
         try
         {
-            var dna = new DnaSequence(DnaInput.AsSpan());
-            var rcDna = dna.ReverseComplement();
-            DnaInput = rcDna.ToString();
-            PackSequence();
+            var dna = new DnaSequence(cleanString.AsSpan());
+            SequenceLength = dna.Length;
+            GcContent = Math.Round(dna.GcContent * 100, 2);
+            SequenceType = "DNA";
+            MeltingTemperature = SequenceAnalyzer.CalculateMeltingTemperature(dna);
+            MolecularWeight = SequenceAnalyzer.CalculateMolecularWeight(dna);
+            Warnings = string.Empty;
         }
-        catch (Exception ex)
+        catch (ArgumentException e)
         {
-            StatusMessage = $"Error: {ex.Message}";
-            StatusColor = "Red";
+            Warnings = $"Validation failed: {e.Message}";
+            SequenceLength = 0;
+            GcContent = 0;
+            MeltingTemperature = 0;
+            MolecularWeight = 0;
+            SequenceType = "Invalid";
         }
     }
 }

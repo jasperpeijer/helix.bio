@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helix.Bio", "Helix.Bio\Heli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helix.Bio.UI", "Helix.Bio.UI\Helix.Bio.UI.csproj", "{56D28AEF-7726-4C3D-9CC1-D47C51667874}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helix.Notebooks.Core", "Helix.Notebooks.Core\Helix.Notebooks.Core.csproj", "{CECBF4D1-FBC6-4BED-B527-1082A2946F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helix.Notebooks.UI", "Helix.Notebooks.UI\Helix.Notebooks.UI.csproj", "{8119BFA0-E068-467F-B8E3-33496A7FB82E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{56D28AEF-7726-4C3D-9CC1-D47C51667874}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56D28AEF-7726-4C3D-9CC1-D47C51667874}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56D28AEF-7726-4C3D-9CC1-D47C51667874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CECBF4D1-FBC6-4BED-B527-1082A2946F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CECBF4D1-FBC6-4BED-B527-1082A2946F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CECBF4D1-FBC6-4BED-B527-1082A2946F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CECBF4D1-FBC6-4BED-B527-1082A2946F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8119BFA0-E068-467F-B8E3-33496A7FB82E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8119BFA0-E068-467F-B8E3-33496A7FB82E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8119BFA0-E068-467F-B8E3-33496A7FB82E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8119BFA0-E068-467F-B8E3-33496A7FB82E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
