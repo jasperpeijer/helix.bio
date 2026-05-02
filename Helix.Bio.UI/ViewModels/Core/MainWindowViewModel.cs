@@ -106,7 +106,8 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
                 }
             }
 
-            var newNotebook = new JupyterWorkspaceTabViewModel(message.FilePath, _pythonKernel);
+            string? currentRoot = Explorer.CurrentDirectory;
+            var newNotebook = new JupyterWorkspaceTabViewModel(message.FilePath, currentRoot, _pythonKernel);
             OpenTabs.Add(newNotebook);
             ActiveTab = newNotebook;
             return;

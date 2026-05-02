@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Helix.Notebooks.UI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+631de3396b547a9f80adac3289d87b5923a0a08d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3dbb47835eaa85b028b4da9610e998b0afd0292")]
 [assembly: System.Reflection.AssemblyProductAttribute("Helix.Notebooks.UI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Helix.Notebooks.UI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -4,13 +4,13 @@ namespace Helix.Notebooks.Core;
 
 public partial class PythonCodeCell : NotebookCell
 {
-    public async Task ExecuteAsync(IPythonKernel kernel, PyModule scope)
+    public async Task ExecuteAsync(IPythonKernel kernel, PyModule scope, string? projectRoot, string? workspaceDir)
     {
         if (string.IsNullOrWhiteSpace(SourceText)) return;
 
         State = CellState.Running;
         OutputText = "Executing...";
-        string result = await Task.Run(() => kernel.Execute(SourceText, scope));
+        string result = await Task.Run(() => kernel.Execute(SourceText, scope, projectRoot, workspaceDir));
         OutputText = result;
         State = result.StartsWith("Python Error:") ? CellState.Error : CellState.Success;
     }

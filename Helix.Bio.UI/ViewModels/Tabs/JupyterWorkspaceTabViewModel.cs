@@ -7,9 +7,10 @@ public class JupyterWorkspaceTabViewModel : ToolWorkspaceTabViewModel
 {
     public NotebookSession ActiveSession { get; }
 
-    public JupyterWorkspaceTabViewModel(string? filePath, IPythonKernel kernel)
+    public JupyterWorkspaceTabViewModel(string? filePath, string? workspaceRoot, IPythonKernel? kernel)
     {
         ActiveSession = new NotebookSession(kernel);
+        ActiveSession.WorkspaceRootPath = workspaceRoot;
 
         if (!string.IsNullOrWhiteSpace(filePath))
         {

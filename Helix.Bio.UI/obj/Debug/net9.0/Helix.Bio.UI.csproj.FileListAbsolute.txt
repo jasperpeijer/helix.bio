@@ -1,4 +1,8 @@
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.UI.exe
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.UI.deps.json
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.UI.runtimeconfig.json
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.UI.dll
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.UI.pdb
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Avalonia.Base.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Avalonia.Controls.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Avalonia.DesignerSupport.dll
@@ -52,15 +56,6 @@ D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Svg.Controls.A
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Svg.Custom.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Svg.Model.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Tmds.DBus.Protocol.dll
-D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
-D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x64\native\libSkiaSharp.dll
-D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.dll
-D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Notebooks.Core.dll
-D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Notebooks.UI.dll
-D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.UI.exe
-D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.UI.deps.json
-D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.UI.runtimeconfig.json
-D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.UI.pdb
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\zh-Hans\AvaloniaEdit.resources.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
@@ -132,6 +127,7 @@ D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\linux
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\osx\native\libHarfBuzzSharp.dylib
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-arm64\native\libHarfBuzzSharp.pdb
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x64\native\libHarfBuzzSharp.pdb
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x86\native\libHarfBuzzSharp.pdb
@@ -149,9 +145,13 @@ D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\linux
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\osx\native\libSkiaSharp.dylib
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-arm64\native\libSkiaSharp.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-arm64\native\libSkiaSharp.pdb
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x64\native\libSkiaSharp.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x64\native\libSkiaSharp.pdb
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x86\native\libSkiaSharp.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\runtimes\win-x86\native\libSkiaSharp.pdb
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.dll
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Notebooks.Core.dll
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Notebooks.UI.dll
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Bio.pdb
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Notebooks.UI.pdb
 D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio.UI\bin\Debug\net9.0\Helix.Notebooks.Core.pdb

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Helix.Bio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+631de3396b547a9f80adac3289d87b5923a0a08d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c51c2b5c73d3a0b7ff568ad79d03c6fba6b277fa")]
 [assembly: System.Reflection.AssemblyProductAttribute("Helix.Bio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Helix.Bio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

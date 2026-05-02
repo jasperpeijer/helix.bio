@@ -15,6 +15,8 @@ public partial class NotebookSession : ObservableObject, IDisposable
     private readonly PyModule _myScope;
 
     private CancellationTokenSource? _debounceCts;
+    
+    public string? WorkspaceRootPath { get; set; }
 
     [ObservableProperty] 
     private string? _currentFilePath;
@@ -111,7 +113,11 @@ public partial class NotebookSession : ObservableObject, IDisposable
         {
             if (cell is PythonCodeCell pythonCell)
             {
-                await pythonCell.ExecuteAsync(_kernel, _myScope);
+                string? notebookDir = !string.IsNullOrWhiteSpace(CurrentFilePath)
+                    ? Path.GetDirectoryName(CurrentFilePath)
+                    : null;
+                
+                await pythonCell.ExecuteAsync(_kernel, _myScope, notebookDir, WorkspaceRootPath);
             }
             else
             {
@@ -125,7 +131,11 @@ public partial class NotebookSession : ObservableObject, IDisposable
     {
         if (cell is PythonCodeCell pythonCell)
         {
-            await pythonCell.ExecuteAsync(_kernel, _myScope);
+            string? notebookDir = !string.IsNullOrWhiteSpace(CurrentFilePath)
+                ? Path.GetDirectoryName(CurrentFilePath)
+                : null;
+            
+            await pythonCell.ExecuteAsync(_kernel, _myScope, notebookDir, WorkspaceRootPath);
         }
         else
         {

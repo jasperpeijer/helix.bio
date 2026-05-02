@@ -45,22 +45,25 @@ public class PythonKernel : IPythonKernel
         }
     }
 
-    public async Task SetWorkingDirectoryAsync(string fullFilePath, PyModule scope)
+    public async Task SetWorkingDirectoryAsync(string fullFilePath, PyModule scope, string? workspaceRoot)
     {
         if (string.IsNullOrWhiteSpace(fullFilePath)) return;
-    
+
         string directory = Path.GetDirectoryName(fullFilePath) ?? string.Empty;
 
         if (Directory.Exists(directory))
         {
-            // We use a raw string (r'') to handle Windows backslashes correctly
-            string code = $"import os\nos.chdir(r'{directory}')";
+            // Convert backslashes to forward slashes.
+            // This prevents the raw string trailing-backslash crash.
+            string safeDirectory = directory.Replace("\\", "/");
         
-            await Task.Run(() => Execute(code, scope));
+            string code = $"import os\nos.chdir('{safeDirectory}')";
+    
+            await Task.Run(() => Execute(code, scope, directory, workspaceRoot));
         }
     }
 
-    public string Execute(string pythonCode, PyModule scope)
+    public string Execute(string pythonCode, PyModule scope, string? notebookDir, string? workspaceDir)
     {
         using (Py.GIL())
         {
@@ -73,8 +76,35 @@ import io
 sys.stdout = io.StringIO()
 sys.stderr = sys.stdout
 ";
-
+                
                 scope.Exec(redirectCode);
+
+                if (!string.IsNullOrWhiteSpace(notebookDir))
+                {
+                    string pathInjection = @"
+import sys
+import os
+import importlib
+
+def inject_path(target_path):
+    if target_path and os.path.exists(target_path) and target_path not in sys.path:
+        sys.path.insert(0, target_path)
+
+importlib.invalidate_caches()
+";
+                    scope.Exec(pathInjection);
+                    
+                    if (!string.IsNullOrWhiteSpace(workspaceDir))
+                    {
+                        scope.Exec($"inject_path(r'{workspaceDir.Replace("\\", "/")}')");
+                    }
+                    
+                    if (!string.IsNullOrWhiteSpace(notebookDir))
+                    {
+                        scope.Exec($"inject_path(r'{notebookDir.Replace("\\", "/")}')");
+                    }
+                }
+                
                 scope.Exec(pythonCode);
 
                 var output = scope.Eval("sys.stdout.getvalue()").ToString(CultureInfo.InvariantCulture);
@@ -95,6 +125,9 @@ sys.stderr = sys.stdout
     public Dictionary<string, string> GetInstalledPackages()
     {
         var packages = new Dictionary<string, string>();
+        
+        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        string sitePackagesPath = Path.Combine(baseDirectory, "python_engine", "Lib", "site-packages");
 
         using (Py.GIL())
         {
@@ -102,21 +135,16 @@ sys.stderr = sys.stdout
             {
                 using (var tempScope = Py.CreateScope())
                 {
-                    string code = @"
-import sys
-import os
+                    string code = $@"
 import importlib.metadata
 
-# 1. Explicitly inject the site-packages path for the bundled engine
-site_packages = os.path.join(sys.prefix, 'Lib', 'site-packages')
-if os.path.exists(site_packages) and site_packages not in sys.path:
-    sys.path.append(site_packages)
+exact_dir = r'{sitePackagesPath}'
 
 def get_packages():
-    result = {}
+    result = {{}}
     try:
-        # 2. Safely extract package names and versions
-        for dist in importlib.metadata.distributions():
+        # We pass path=[exact_dir] to bypass sys.path entirely and force a hard drive scan
+        for dist in importlib.metadata.distributions(path=[exact_dir]):
             name = dist.metadata.get('Name') or getattr(dist, 'name', 'Unknown')
             version = getattr(dist, 'version', 'Unknown')
             if name:

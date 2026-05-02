@@ -16,12 +16,12 @@ public interface IPythonKernel : IDisposable
     /// <summary>
     /// Executes Python code within a specific scope and captures the output.
     /// </summary>
-    string Execute(string pythonCode, PyModule scope);
+    string Execute(string pythonCode, PyModule scope, string? notebookDir, string? workspaceDir);
 
     /// <summary>
     /// Updates the working directory of the kernel to match the file being edited.
     /// </summary>
-    Task SetWorkingDirectoryAsync(string fullFilePath, PyModule scope);
+    Task SetWorkingDirectoryAsync(string fullFilePath, PyModule scope, string? workspaceRoot);
 
     /// <summary>
     /// Scans the environment to list all currently installed PyPI packages.
