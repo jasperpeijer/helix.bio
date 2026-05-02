@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key="BgPrimary" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="BgSecondary" Color="#F8FAFC"/>
+    <SolidColorBrush x:Key="BgHover" Color="#DDDDDD"/>
+    <SolidColorBrush x:Key="BorderDefault" Color="#E2E8F0"/>
+    <SolidColorBrush x:Key="BorderDark" Color="#CBD5E1"/>
+        
+    <SolidColorBrush x:Key="TextPrimary" Color="#334155"/>
+    <SolidColorBrush x:Key="TextSecondary" Color="#64748B"/>
+    <SolidColorBrush x:Key="TextMuted" Color="#94A3B8"/>
+        
+    <SolidColorBrush x:Key="AccentPrimary" Color="#2563EB"/>
+    <SolidColorBrush x:Key="AccentHighlight" Color="#3674FC"/>
+    <SolidColorBrush x:Key="SuccessText" Color="#059669"/>
+        
+    <!-- Terminal Palette -->
+    <SolidColorBrush x:Key="BgTerminal" Color="#1E1E1E"/>
+    <SolidColorBrush x:Key="TextTerminal" Color="#DCDCDC"/>
+        
+    <!-- Icon Palette -->
+    <SolidColorBrush x:Key="IconHelixColor" Color="#10B981"/>
+    <SolidColorBrush x:Key="IconFolderColor" Color="#D97706"/>
+    <SolidColorBrush x:Key="IconJupyterColor" Color="#F97316"/>
+    
+</ResourceDictionary>

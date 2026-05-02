@@ -24,11 +24,11 @@
         </DataGrid>
 
         <!-- Bottom: Pip Terminal Output -->
-        <Border Grid.Row="2" Background="#1e1e1e" Margin="10" CornerRadius="4">
+        <Border Grid.Row="2" Background="{DynamicResource BgTerminal}" Margin="10" CornerRadius="4">
             <ScrollViewer>
                 <TextBlock Text="{Binding TerminalOutput}" 
                            FontFamily="Cascadia Code,Consolas,Monospace" 
-                           Foreground="#dcdcdc" Margin="5" TextWrapping="Wrap"/>
+                           Foreground="{DynamicResource TextTerminal}" Margin="5" TextWrapping="Wrap"/>
             </ScrollViewer>
         </Border>
     </Grid>

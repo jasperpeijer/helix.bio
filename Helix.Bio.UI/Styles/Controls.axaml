@@ -1,0 +1,96 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:CompileBindings="False">
+    
+    <Style Selector="ToolTip">
+        <Setter Property="MaxWidth" Value="2000"/>
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="Padding" Value="15"></Setter>
+    </Style>
+    
+    <Style Selector="TabControl.activityBar > TabItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="14,16"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextMuted}"/> 
+        <Setter Property="BorderThickness" Value="0,0,0,0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+    </Style>
+    
+    <Style Selector="TabControl.activityBar > TabItem:selected">
+        <Setter Property="Foreground" Value="{DynamicResource AccentPrimary}"/> 
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentPrimary}"/> 
+        <Setter Property="Background" Value="{DynamicResource BgPrimary}"/>
+    </Style>
+    
+    <Style Selector="TabControl.workspace">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid RowDefinitions="Auto,*">
+                    <ScrollViewer Grid.Row="0"
+                                  HorizontalScrollBarVisibility="Hidden" 
+                                  VerticalScrollBarVisibility="Disabled">
+                        <ItemsPresenter Name="PART_ItemsPresenter"
+                                        ItemsPanel="{TemplateBinding ItemsPanel}" />
+                    </ScrollViewer>
+                    
+                    <ContentPresenter Grid.Row="1"
+                                      Name="PART_SelectedContentHost"
+                                      Content="{TemplateBinding SelectedContent}"
+                                      ContentTemplate="{TemplateBinding SelectedContentTemplate}"
+                                      Margin="0"/>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="TabControl.workspace > TabItem">
+        <Setter Property="MinHeight" Value="32"/> 
+        <Setter Property="FontSize" Value="12"/> 
+        <Setter Property="Margin" Value="5,0"></Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_LayoutRoot"
+                        Background="{DynamicResource BgSecondary}"
+                        BorderBrush="{DynamicResource BorderDefault}"
+                        BorderThickness="0"
+                        Margin="0,0,0,0"
+                        ToolTip.Tip="{Binding TabToolTip}"
+                        ToolTip.ShowDelay="400">
+                    <Panel>
+                        <ContentPresenter Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          Margin="12,0,12,0" 
+                                          VerticalAlignment="Center"/>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="TabControl.workspace > TabItem:pointerover /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="#EEEEEE"></Setter>
+        <Setter Property="CornerRadius" Value="3"></Setter>
+    </Style>
+    
+    <Style Selector="TabControl.workspace > TabItem:selected /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="#E2EBFF" />
+        <Setter Property="BorderThickness" Value="1,1,1,1"/> 
+        <Setter Property="CornerRadius" Value="3"></Setter>
+        <Setter Property="BorderBrush" Value="#C2D5FD"></Setter>
+    </Style>
+    
+    <Style Selector="TabControl.workspace > TabItem:focus /template/ Border#PART_LayoutRoot">
+        <Setter Property="BorderBrush" Value="#C2D5FD"></Setter>
+    </Style>
+    
+    <Style Selector="Button.closeTab /template/ ContentPresenter">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    
+    <Style Selector="Button.closeTab:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BgHover}"/> 
+        <Setter Property="CornerRadius" Value="9"></Setter>
+    </Style>
+        
+</Styles>

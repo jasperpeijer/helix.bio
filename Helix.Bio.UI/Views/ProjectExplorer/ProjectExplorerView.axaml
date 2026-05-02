@@ -8,8 +8,8 @@
     <Grid RowDefinitions="Auto, *">
         
         <StackPanel Grid.Row="0" Spacing="4" Margin="20">
-            <TextBlock Text="PROJECT EXPLORER" Foreground="#64748B" FontSize="11" FontWeight="Bold" LetterSpacing="1.2"/>
-            <TextBlock Text="{Binding CurrentProjectPath}" Foreground="#2563EB" FontSize="13" FontWeight="SemiBold"/>
+            <TextBlock Text="PROJECT EXPLORER" Foreground="{DynamicResource TextSecondary}" FontSize="11" FontWeight="Bold" LetterSpacing="1.2"/>
+            <TextBlock Text="{Binding CurrentProjectPath}" Foreground="{DynamicResource AccentPrimary}" FontSize="13" FontWeight="SemiBold"/>
         </StackPanel>
 
         <TreeView Grid.Row="1" 
@@ -29,16 +29,16 @@
                     <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,2">
                         
                         <Path Data="{StaticResource FolderIcon}" 
-                              Fill="#D97706" Width="14" Height="14" Stretch="Uniform"
+                              Fill="{DynamicResource IconFolderColor}" Width="14" Height="14" Stretch="Uniform"
                               IsVisible="{Binding IsDirectory}"/>
                               
                         <Path Data="{StaticResource HelixIcon}" 
-                              Fill="#10B981"
+                              Fill="{DynamicResource IconHelixColor}"
                               Width="14" Height="14" Stretch="Uniform"
                               IsVisible="{Binding IsFasta}"/>
 
                         <Path Data="{StaticResource FileIcon}" 
-                              Fill="#94A3B8" Width="14" Height="14" Stretch="Uniform"
+                              Fill="{DynamicResource TextMuted}" Width="14" Height="14" Stretch="Uniform"
                               IsVisible="{Binding IsDefaultFile}"/>
                         
                         <Viewbox Width="14" Height="14" Stretch="Uniform" IsVisible="{Binding IsNotebook}">
@@ -47,7 +47,7 @@
                             <Canvas Width="28" Height="28">
         
                                 <Path Data="{StaticResource JupyterIcon}" 
-                                      Stroke="#F97316" 
+                                      Stroke="{DynamicResource IconJupyterColor}" 
                                       StrokeThickness="2" 
                                       StrokeLineCap="Round"
                                       StrokeJoin="Round"
@@ -57,7 +57,7 @@
                             </Canvas>
                         </Viewbox>
                         
-                        <TextBlock Text="{Binding Name}" Foreground="#334155" FontSize="13" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextPrimary}" FontSize="13" VerticalAlignment="Center"/>
                     </StackPanel>
                 </TreeDataTemplate>
             </TreeView.ItemTemplate>

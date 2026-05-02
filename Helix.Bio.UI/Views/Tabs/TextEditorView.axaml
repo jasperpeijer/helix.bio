@@ -23,8 +23,8 @@
              FontFamily="Consolas, Courier New, monospace"
              FontSize="13"
              Padding="16 32"
-             Background="#FFFFFF"
-             Foreground="#334155"
+             Background="{DynamicResource BgPrimary}"
+             Foreground="{DynamicResource TextPrimary}"
              BorderThickness="0"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"/>
