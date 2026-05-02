@@ -1,7 +1,6 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:Helix.Bio.UI.ViewModels"
-             xmlns:conv="clr-namespace:Helix.Bio.UI.Converters"
              x:Class="Helix.Bio.UI.Views.ProjectExplorerView"
              x:CompileBindings="False"
              x:DataType="vm:ProjectExplorerViewModel">
@@ -41,6 +40,22 @@
                         <Path Data="{StaticResource FileIcon}" 
                               Fill="#94A3B8" Width="14" Height="14" Stretch="Uniform"
                               IsVisible="{Binding IsDefaultFile}"/>
+                        
+                        <Viewbox Width="14" Height="14" Stretch="Uniform" IsVisible="{Binding IsNotebook}">
+    
+                            <!-- The Canvas forces the invisible 24x24 grid to be respected -->
+                            <Canvas Width="28" Height="28">
+        
+                                <Path Data="{StaticResource JupyterIcon}" 
+                                      Stroke="#F97316" 
+                                      StrokeThickness="2" 
+                                      StrokeLineCap="Round"
+                                      StrokeJoin="Round"
+                                      Fill="Transparent"
+                                      IsVisible="{Binding IsNotebook}"/>
+              
+                            </Canvas>
+                        </Viewbox>
                         
                         <TextBlock Text="{Binding Name}" Foreground="#334155" FontSize="13" VerticalAlignment="Center"/>
                     </StackPanel>

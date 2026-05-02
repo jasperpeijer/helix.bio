@@ -8,24 +8,40 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Models\"/>
-        <AvaloniaResource Include="Assets\**"/>
+        <AvaloniaResource Include="Assets\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="12.0.0"/>
-        <PackageReference Include="Avalonia.Desktop" Version="12.0.0"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.0"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.0"/>
+        <PackageReference Include="Avalonia" Version="12.0.0" />
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="12.0.0" />
+        <PackageReference Include="Avalonia.Desktop" Version="12.0.0" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.0" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.0" />
         <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.0">
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.1"/>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.7" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Helix.Bio\Helix.Bio.csproj" />
       <ProjectReference Include="..\Helix.Notebooks.UI\Helix.Notebooks.UI.csproj" />
+      <ProjectReference Include="..\Helix.Notebooks.Core\Helix.Notebooks.Core.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Styles\" />
+    </ItemGroup>
+
+    <!-- DEVELOPMENT MODE: Link the UI project directly to the Core's python engine -->
+    <Target Name="LinkPythonEngineUI" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+        <MakeDir Directories="$(TargetDir)" />
+        <!-- 1. Forcibly delete any ghost folders -->
+        <Exec Command="if exist &quot;$(TargetDir)python_engine&quot; rmdir /s /q &quot;$(TargetDir)python_engine&quot;" />
+        <!-- 2. Create the Junction pointing back to the Notebooks.Core source folder -->
+        <Exec Command="mklink /J &quot;$(TargetDir)python_engine&quot; &quot;$(ProjectDir)..\Helix.Notebooks.Core\python_engine&quot;" />
+    </Target>
+
 </Project>

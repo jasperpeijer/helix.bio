@@ -6,11 +6,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Helix.Bio.UI.Views;
+using Helix.Notebooks.Core;
 
 namespace Helix.Bio.UI.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMessage>
+public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMessage>, IDisposable
 {
+    private readonly PythonKernel _pythonKernel;
     public ObservableCollection<WorkspaceTabViewModel> OpenTabs { get; } = [];
     public ProjectExplorerViewModel Explorer { get; } = new();
     
@@ -18,22 +20,11 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
 
     public MainWindowViewModel()
     {
+        _pythonKernel = new PythonKernel();
         WeakReferenceMessenger.Default.Register(this);
         OpenNewSequenceProfiler();
         string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         Explorer.LoadDirectory(docsPath);
-
-        var newJupyter = new JupyterWorkspaceTabViewModel()
-        {
-            TabTitle = "Jupyter"
-        };
-        OpenTabs.Add(newJupyter);
-        
-        var newJupyter2 = new JupyterWorkspaceTabViewModel()
-        {
-            TabTitle = "Jupyter"
-        };
-        OpenTabs.Add(newJupyter2);
     }
 
     [RelayCommand]
@@ -89,6 +80,18 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
         ActiveTab = index == 0 ? OpenTabs[^1] : OpenTabs[index - 1];
     }
 
+    [RelayCommand]
+    public void OpenPackageManager()
+    {
+        var viewModel = new PackageManagerViewModel(_pythonKernel);
+        var window = new PackageManagerWindow
+        {
+            DataContext = viewModel
+        };
+
+        window.Show();
+    }
+
     public void Receive(OpenFileMessage message)
     {
         if (message.FilePath.EndsWith(".ipynb", System.StringComparison.OrdinalIgnoreCase))
@@ -103,7 +106,7 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
                 }
             }
 
-            var newNotebook = new JupyterWorkspaceTabViewModel(message.FilePath);
+            var newNotebook = new JupyterWorkspaceTabViewModel(message.FilePath, _pythonKernel);
             OpenTabs.Add(newNotebook);
             ActiveTab = newNotebook;
             return;
@@ -167,5 +170,10 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMes
         int take = System.Math.Min(segments.Length, parts);
 
         return string.Join("/", segments.Skip(segments.Length - take));
+    }
+
+    public void Dispose()
+    {
+        _pythonKernel?.Dispose();
     }
 }

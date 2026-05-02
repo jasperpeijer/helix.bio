@@ -21,7 +21,9 @@ public partial class FileSystemNode : ViewModelBase
                            string.Equals(FileExtension, ".frn", StringComparison.OrdinalIgnoreCase) ||
                            string.Equals(FileExtension, ".mpfa", StringComparison.OrdinalIgnoreCase);
     
-    public bool IsDefaultFile => !IsDirectory && !IsFasta;
+    public bool IsDefaultFile => !IsDirectory && !IsFasta && !IsNotebook;
+
+    public bool IsNotebook => !IsDirectory && Name.EndsWith(".ipynb", StringComparison.OrdinalIgnoreCase);
 
     [ObservableProperty] private bool _isExpanded;
 

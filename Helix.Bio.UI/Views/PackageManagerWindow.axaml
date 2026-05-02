@@ -1,0 +1,35 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Helix.Bio.UI.ViewModels"
+        x:Class="Helix.Bio.UI.Views.PackageManagerWindow"
+        x:DataType="vm:PackageManagerViewModel"
+        x:CompileBindings="False"
+        Title="Helix Package Manager" Width="700" Height="500">
+    
+    <Grid RowDefinitions="Auto, *, 150">
+        <!-- Top Bar: Search and Install -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" Spacing="10">
+            <TextBox Width="400" Watermark="Search PyPI / Package Name..." Text="{Binding SearchText}"/>
+            <Button Content="Install Package" Command="{Binding InstallCommand}" Classes="accent"/>
+            <Button Content="Refresh" Command="{Binding RefreshCommand}"/>
+        </StackPanel>
+
+        <!-- Middle: Table of Installed Packages -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding InstalledPackages}" 
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Package Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Version" Binding="{Binding Version}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Bottom: Pip Terminal Output -->
+        <Border Grid.Row="2" Background="#1e1e1e" Margin="10" CornerRadius="4">
+            <ScrollViewer>
+                <TextBlock Text="{Binding TerminalOutput}" 
+                           FontFamily="Cascadia Code,Consolas,Monospace" 
+                           Foreground="#dcdcdc" Margin="5" TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>

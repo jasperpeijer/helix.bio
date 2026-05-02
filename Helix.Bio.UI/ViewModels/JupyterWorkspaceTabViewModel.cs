@@ -5,11 +5,11 @@ namespace Helix.Bio.UI.ViewModels;
 
 public class JupyterWorkspaceTabViewModel : ToolWorkspaceTabViewModel
 {
-    public NotebookSession ActiveSession { get; } = new();
+    public NotebookSession ActiveSession { get; }
 
-    public JupyterWorkspaceTabViewModel(string? filePath = null)
+    public JupyterWorkspaceTabViewModel(string? filePath, PythonKernel kernel)
     {
-        ActiveSession = new NotebookSession();
+        ActiveSession = new NotebookSession(kernel);
 
         if (!string.IsNullOrWhiteSpace(filePath))
         {
