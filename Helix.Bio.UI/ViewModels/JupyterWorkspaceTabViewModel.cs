@@ -7,7 +7,7 @@ public class JupyterWorkspaceTabViewModel : ToolWorkspaceTabViewModel
 {
     public NotebookSession ActiveSession { get; }
 
-    public JupyterWorkspaceTabViewModel(string? filePath, PythonKernel kernel)
+    public JupyterWorkspaceTabViewModel(string? filePath, IPythonKernel kernel)
     {
         ActiveSession = new NotebookSession(kernel);
 

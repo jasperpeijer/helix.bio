@@ -12,15 +12,15 @@ namespace Helix.Bio.UI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IRecipient<OpenFileMessage>, IDisposable
 {
-    private readonly PythonKernel _pythonKernel;
+    private readonly IPythonKernel _pythonKernel;
     public ObservableCollection<WorkspaceTabViewModel> OpenTabs { get; } = [];
     public ProjectExplorerViewModel Explorer { get; } = new();
     
     [ObservableProperty] private WorkspaceTabViewModel? _activeTab;
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(IPythonKernel pythonKernel)
     {
-        _pythonKernel = new PythonKernel();
+        _pythonKernel = pythonKernel;
         WeakReferenceMessenger.Default.Register(this);
         OpenNewSequenceProfiler();
         string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

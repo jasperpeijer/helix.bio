@@ -12,7 +12,7 @@ namespace Helix.Bio.UI.ViewModels;
 [ObservableObject]
 public partial class PackageManagerViewModel
 {
-    private readonly PythonKernel _kernel;
+    private readonly IPythonKernel _kernel;
 
     [ObservableProperty] 
     private string _searchText = string.Empty;
@@ -25,7 +25,7 @@ public partial class PackageManagerViewModel
 
     public ObservableCollection<PythonPackage> InstalledPackages { get; } = new();
 
-    public PackageManagerViewModel(PythonKernel kernel)
+    public PackageManagerViewModel(IPythonKernel kernel)
     {
         _kernel = kernel;
         _ = RefreshAsync();
