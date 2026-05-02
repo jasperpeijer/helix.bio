@@ -1,0 +1,12 @@
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\bin\Debug\net9.0\Helix.Bio.deps.json
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\bin\Debug\net9.0\Helix.Bio.dll
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\bin\Debug\net9.0\Helix.Bio.pdb
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\obj\Debug\net9.0\Helix.Bio.GeneratedMSBuildEditorConfig.editorconfig
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\obj\Debug\net9.0\Helix.Bio.AssemblyInfoInputs.cache
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\obj\Debug\net9.0\Helix.Bio.AssemblyInfo.cs
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\obj\Debug\net9.0\Helix.Bio.csproj.CoreCompileInputs.cache
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\obj\Debug\net9.0\Helix.Bio.sourcelink.json
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\obj\Debug\net9.0\Helix.Bio.dll
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\obj\Debug\net9.0\refint\Helix.Bio.dll
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\obj\Debug\net9.0\Helix.Bio.pdb
+D:\Self Study\C#\Projects\Helix.Bio\Helix.Bio\obj\Debug\net9.0\ref\Helix.Bio.dll

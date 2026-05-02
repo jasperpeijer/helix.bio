@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Helix.Notebooks.Core.Serialization;
+using Python.Runtime;
 
 namespace Helix.Notebooks.Core;
 
@@ -10,7 +11,8 @@ public partial class NotebookSession : ObservableObject, IDisposable
 {
     public ObservableCollection<NotebookCell> Cells { get; } = [];
     
-    private readonly PythonKernel _kernel;
+    private readonly IPythonKernel _kernel;
+    private readonly PyModule _myScope;
 
     private CancellationTokenSource? _debounceCts;
 
@@ -20,9 +22,10 @@ public partial class NotebookSession : ObservableObject, IDisposable
     [ObservableProperty] 
     private string _saveStatus = "Unsaved";
 
-    public NotebookSession()
+    public NotebookSession(IPythonKernel kernel)
     {
-        _kernel = new PythonKernel();
+        _kernel = kernel;
+        _myScope = kernel.CreateScope();
         Cells.CollectionChanged += Cells_CollectionChanged;
         AddPythonCell();
     }
@@ -108,7 +111,7 @@ public partial class NotebookSession : ObservableObject, IDisposable
         {
             if (cell is PythonCodeCell pythonCell)
             {
-                await pythonCell.ExecuteAsync(_kernel);
+                await pythonCell.ExecuteAsync(_kernel, _myScope);
             }
             else
             {
@@ -122,7 +125,7 @@ public partial class NotebookSession : ObservableObject, IDisposable
     {
         if (cell is PythonCodeCell pythonCell)
         {
-            await pythonCell.ExecuteAsync(_kernel);
+            await pythonCell.ExecuteAsync(_kernel, _myScope);
         }
         else
         {

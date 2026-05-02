@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Helix.Bio.UI/App.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Icons.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Styles/AppStyles.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Styles/Colors.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Styles/Controls.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Styles/Icons.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/Core/MainWindow.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/Core/PackageManagerWindow.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/JupyterWorkspaceTabView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/MainWindow.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/PackageManagerWindow.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/ProjectExplorer/ProjectExplorerView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/ProjectExplorerView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/SequenceProfilerView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/Tabs/JupyterWorkspaceTabView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/Tabs/SequenceProfilerView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/Tabs/TextEditorView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/TestControl.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/TestControlView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Bio.UI/Views/TextEditorView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+        <entry key="Helix.Notebooks.UI/NotebookView.axaml" value="Helix.Bio.UI/Helix.Bio.UI.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
